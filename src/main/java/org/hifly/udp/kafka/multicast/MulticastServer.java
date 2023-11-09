@@ -15,6 +15,7 @@ public class MulticastServer extends Thread {
     protected byte[] buf = new byte[2048];
     protected InetAddress group;
     private final KafkaProducer<String, String> kafkaProducer;
+    private final String topic;
 
     private static Properties createProducerConfig() {
         Properties props = new Properties();
@@ -24,8 +25,9 @@ public class MulticastServer extends Thread {
         return props;
     }
 
-    public MulticastServer(String address, int port) throws IOException {
+    public MulticastServer(String address, int port, String topic) throws IOException {
         this.kafkaProducer = new KafkaProducer<>(createProducerConfig());
+        this.topic = topic;
         socket = new MulticastSocket(port);
         socket.setReuseAddress(true);
         group = InetAddress.getByName(address);
@@ -38,7 +40,7 @@ public class MulticastServer extends Thread {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 String msg = new String(buf, 0, packet.getLength());
-                kafkaProducer.send(new ProducerRecord<>("telemetry", msg));
+                kafkaProducer.send(new ProducerRecord<>(this.topic, msg));
                 // Reset the length of the packet before reusing it.
                 packet.setLength(buf.length);
                 if (msg.equals("end")) {
