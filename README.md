@@ -5,15 +5,12 @@ Publish UDP packets to Kafka
 ## How to run on local
 
 ## Start demo environment
+ 
+ - Start a UDP/Multicast server listening on _230.0.0.0_ and port _4446_
+ - Start kafka broker on port 9092
 
 ```bash
 kafka-demo/start.sh
-```
-
-Start a UDP/Multicast server listening on _230.0.0.0_ and port _4446_:
-
-```bash
-mvn clean compile && mvn exec:java -Dexec.mainClass="org.hifly.udp.kafka.multicast.Application"
 ```
 
 ## Tests
