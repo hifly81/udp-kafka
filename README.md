@@ -5,13 +5,18 @@ Publish UDP packets to Kafka
 ## How to run on local
 
 ## Start demo environment
- 
- - Start a UDP/Multicast server listening on _230.0.0.0_ and port _4446_
- - Start kafka broker on port 9092
 
 ```bash
-kafka-demo/start.sh
+kafka-demo/start.sh <number of servers> <bind address> <bind port> <topic name>
 ```
+
+example:
+```bash
+kafka-demo/start.sh 5 230.0.0.0 4446 telemetry
+```
+
+- Start 5 UDP/Multicast servers listening on 230.0.0.0 and port 4446 publishing to kafka topic telemetry.
+- Start kafka broker on port 9092
 
 ## Tests
 
