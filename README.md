@@ -7,7 +7,7 @@ Publish UDP packets to Kafka.
 ## Start demo environment
 
 ```bash
-kafka-demo/start.sh <number of servers> <bind address> <bind port> <topic name>
+kafka-demo/start.sh <number of receivers> <bind address> <bind port> <topic name>
 ```
 
 example:
