@@ -10,7 +10,15 @@ Publish UDP packets to Kafka
 kafka-demo/start.sh
 ```
 
+Start a UDP/Multicast server listening on _230.0.0.0_ and port _4446_:
+
+```bash
+mvn clean compile && mvn exec:java -Dexec.mainClass="org.hifly.udp.kafka.multicast.Application"
+```
+
 ## Tests
+
+Packets will be sent to a topic named _telemetry_.
 
 Simple session test with _nc_ command:
 
@@ -27,7 +35,7 @@ Simulate a stress test:
 python udp_stress_client.py 1000 10
 ```
 
-## Teardown demo environment
+## Teardown
 
 ```bash
 kafka-demo/stop.sh
