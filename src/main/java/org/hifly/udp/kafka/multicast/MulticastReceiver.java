@@ -9,11 +9,11 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.util.Properties;
 
-public class MulticastServer extends Thread {
+public class MulticastReceiver extends Thread {
 
-    protected MulticastSocket socket;
-    protected byte[] buf = new byte[2048];
-    protected InetAddress group;
+    private final MulticastSocket socket;
+    private final byte[] buf = new byte[2048];
+    private final InetAddress group;
     private final KafkaProducer<String, String> kafkaProducer;
     private final String topic;
 
@@ -25,7 +25,7 @@ public class MulticastServer extends Thread {
         return props;
     }
 
-    public MulticastServer(String address, int port, String topic) throws IOException {
+    public MulticastReceiver(String address, int port, String topic) throws IOException {
         this.kafkaProducer = new KafkaProducer<>(createProducerConfig());
         this.topic = topic;
         socket = new MulticastSocket(port);

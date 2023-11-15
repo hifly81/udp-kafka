@@ -2,21 +2,22 @@ package org.hifly.udp.kafka.multicast;
 
 public class Application {
 
+    private static int RECEIVERS = 5;
+    private static String BIND_ADDRESS = "230.0.0.0";
+    private static int BIND_PORT = 4446;
+    private static String KAFKA_TOPIC = "telemetry";
+
     public static void main (String [] args) throws Exception {
-        int servers = 5;
-        String address = "230.0.0.0";
-        int port = 4446;
-        String topic = "telemetry";
 
         if(args !=null && args.length == 4) {
-            servers = args[0] != null && !args[0].equals("")? Integer.valueOf(args[0]): servers;
-            address = args[1] != null && !args[1].equals("")? args[1]: address;
-            port = args[2] != null && !args[2].equals("")? Integer.valueOf(args[2]): port;
-            topic = args[3] != null && !args[3].equals("")? args[3]: topic;
+            RECEIVERS = args[0] != null && !args[0].isEmpty() ? Integer.parseInt(args[0]): RECEIVERS;
+            BIND_ADDRESS = args[1] != null && !args[1].isEmpty() ? args[1]: BIND_ADDRESS;
+            BIND_PORT = args[2] != null && !args[2].isEmpty() ? Integer.parseInt(args[2]): BIND_PORT;
+            KAFKA_TOPIC = args[3] != null && !args[3].isEmpty() ? args[3]: KAFKA_TOPIC;
         }
 
-        for (int i = 0; i < servers; i++) {
-            new MulticastServer(address, port, topic).start();
+        for (int i = 0; i < RECEIVERS; i++) {
+            new MulticastReceiver(BIND_ADDRESS, BIND_PORT, KAFKA_TOPIC).start();
         }
     }
 

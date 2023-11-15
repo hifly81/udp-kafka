@@ -1,6 +1,6 @@
 # UDP to Kafka
 
-Publish UDP packets to Kafka
+Publish UDP packets to Kafka.
 
 ## How to run on local
 
@@ -15,12 +15,10 @@ example:
 kafka-demo/start.sh 5 230.0.0.0 4446 telemetry
 ```
 
-- Start 5 UDP/Multicast servers listening on 230.0.0.0 and port 4446 publishing to kafka topic telemetry.
+- Start 5 UDP Multicast receivers listening on 230.0.0.0 and port 4446 publishing to kafka topic telemetry.
 - Start kafka broker on port 9092
 
 ## Tests
-
-Packets will be sent to a topic named _telemetry_.
 
 Simple session test with _nc_ command:
 
