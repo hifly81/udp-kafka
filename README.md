@@ -4,6 +4,14 @@ Publish UDP packets to Kafka
 
 ## How to run on local
 
+## Start demo environment
+
+```bash
+kafka-demo/start.sh
+```
+
+## Tests
+
 Simple session test with _nc_ command:
 
 ```bash
@@ -17,4 +25,10 @@ Simulate a stress test:
 ```bash
 # send 1000 bytes 10 times
 python udp_stress_client.py 1000 10
+```
+
+## Teardown demo environment
+
+```bash
+kafka-demo/stop.sh
 ```
